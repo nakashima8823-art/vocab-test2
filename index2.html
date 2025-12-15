@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>英単語テスト（入力＋手書き対応）</title>
+
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;padding:18px;background:#fafafa}
+.controlCard,.card,.barWrap{background:#fff;border-radius:10px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);max-width:720px;margin:12px auto}
+h1{font-size:18px}
+.jp{font-size:22px;margin-bottom:6px}
+.no{font-size:14px;color:#555;margin-bottom:10px}
+input[type=text]{width:100%;padding:10px;font-size:18px;border-radius:6px;border:1px solid #ccc}
+canvas{border:1px solid #ccc;border-radius:6px;touch-action:none;background:#fff}
+.result{margin-top:12px;font-size:18px;min-height:30px}
+.correct{color:green;font-weight:700}
+.incorrect{color:#d9534f;font-weight:700}
+.answer{color:#1a73e8;margin-top:6px}
+.small{font-size:12px;color:#666}
+button{padding:6px 10px;font-size:14px;border-radius:6px;border:0;background:#1976d2;color:#fff;margin-right:6px}
+</style>
+</head>
+
+<body>
+<h1>英単語テスト</h1>
+
+<div class="controlCard">
+  出題番号（例：1-10,15-20）<br>
+  <input type="text" id="rangeInput" value="1-10">
+  <button id="startBtn">開始</button>
+  <div id="loadInfo" class="small" style="margin-top:6px"></div>
+</div>
+
+<div id="quizArea"></div>
+
+<script>
+(function(){
+
+/* ===== CSV ===== */
+function parseCSV(t){
+  t=t.replace(/^\uFEFF/,'');
+  const r=[];let c='',row=[],q=false;
+  for(let i=0;i<t.length;i++){
+    const x=t[i],n=t[i+1];
+    if(x=='"'){ if(q&&n=='"'){c+='"';i++;} else q=!q; continue;}
+    if(x==','&&!q){row.push(c);c='';continue;}
+    if((x=='\n'||x=='\r')&&!q){
+      if(c||row.length){row.push(c);r.push(row);}
+      c='';row=[]; if(x=='\r'&&n=='\n')i++; continue;
+    }
+    c+=x;
+  }
+  if(c||row.length){row.push(c);r.push(row);}
+  return r;
+}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+let allQ=[],pool=[],cur=0,waiting=false;
+
+/* ===== DOM ===== */
+const rangeInput=document.getElementById('rangeInput');
+const startBtn=document.getElementById('startBtn');
+const quizArea=document.getElementById('quizArea');
+const loadInfo=document.getElementById('loadInfo');
+
+/* ===== CSV load ===== */
+fetch('words.csv').then(r=>r.text()).then(t=>{
+  parseCSV(t).forEach(r=>{
+    const no=Number(r[0]),e=r[1]?.trim(),j=r[2]?.trim();
+    if(!isNaN(no)&&e&&j) allQ.push({no,eng:e,jp:j});
+  });
+  loadInfo.textContent=`${allQ.length}問 読み込み完了`;
+});
+
+function parseRanges(s){
+  const set=new Set();
+  s.split(',').forEach(p=>{
+    if(p.includes('-')){
+      let[a,b]=p.split('-').map(Number);
+      for(let i=a;i<=b;i++) set.add(i);
+    }else{
+      const n=Number(p); if(!isNaN(n)) set.add(n);
+    }
+  });
+  return set;
+}
+
+startBtn.onclick=()=>{
+  const nums=parseRanges(rangeInput.value);
+  pool=shuffle(allQ.filter(q=>nums.has(q.no)));
+  if(!pool.length){alert('問題がありません');return;}
+  cur=0; waiting=false;
+  show();
+};
+
+function show(){
+  quizArea.innerHTML='';
+  if(cur>=pool.length){alert('終了！');return;}
+  const q=pool[cur];
+  quizArea.innerHTML=`
+  <div class="card">
+    <div class="no">問題番号：${q.no}</div>
+    <div class="jp"><b>日本語：</b>${esc(q.jp)}</div>
+
+    <input id="ans" type="text" placeholder="キーボード入力">
+
+    <div class="small" style="margin:8px 0">または手書き：</div>
+    <canvas id="pad" width="320" height="120"></canvas><br>
+    <button id="clearBtn">消す</button>
+
+    <div id="res" class="result"></div>
+    <div id="corr" class="answer"></div>
+  </div>`;
+
+  const input=document.getElementById('ans');
+  const canvas=document.getElementById('pad');
+  const ctx=canvas.getContext('2d');
+  ctx.lineWidth=3; ctx.lineCap='round';
+
+  let drawing=false;
+  canvas.onpointerdown=e=>{drawing=true;ctx.beginPath();ctx.moveTo(e.offsetX,e.offsetY);}
+  canvas.onpointermove=e=>{if(drawing){ctx.lineTo(e.offsetX,e.offsetY);ctx.stroke();}}
+  canvas.onpointerup=()=>drawing=false;
+  canvas.onpointerleave=()=>drawing=false;
+
+  document.getElementById('clearBtn').onclick=()=>ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  input.focus();
+  input.onkeydown=e=>{
+    if(e.key==='Enter'){
+      e.preventDefault();
+      if(!waiting) check(q.eng);
+      else{waiting=false;cur++;show();}
+    }
+  };
+}
+
+function check(ans){
+  const input=document.getElementById('ans');
+  const res=document.getElementById('res');
+  const corr=document.getElementById('corr');
+  if(input.value.trim().toLowerCase()===ans.toLowerCase()){
+    res.innerHTML='<span class="correct">〇 正解</span>';
+  }else{
+    res.innerHTML='<span class="incorrect">✕ 不正解</span>';
+    corr.textContent='→ 正解：'+ans;
+  }
+  waiting=true;
+}
+
+})();
+</script>
+</body>
+</html>
