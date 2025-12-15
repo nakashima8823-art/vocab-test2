@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>英単語テスト（番号指定・手書き対応）</title>
+<title>英単語テスト（番号指定・複数範囲）</title>
 
 <style>
 body{
@@ -19,29 +19,19 @@ h1{font-size:18px}
 .jp{font-size:22px;margin-bottom:6px}
 .no{font-size:14px;color:#555;margin-bottom:10px}
 
-/* ★ 手書きしやすい入力欄 */
+/* ★ Scribbleしやすい入力欄 */
 input[type=text]{
   width:100%;
-  padding:16px;
+  padding:14px;
   font-size:22px;
-  border-radius:10px;
+  border-radius:8px;
   border:2px solid #ccc;
-  min-height:56px;
 }
 
 .result{margin-top:12px;font-size:18px;min-height:30px}
 .correct{color:green;font-weight:700}
 .incorrect{color:#d9534f;font-weight:700}
 .answer{color:#1a73e8;margin-top:6px}
-
-button{
-  padding:10px 16px;
-  font-size:16px;
-  border-radius:8px;
-  border:0;
-  background:#1976d2;
-  color:#fff
-}
 
 .labelRow{
   display:flex;justify-content:space-between;
@@ -53,7 +43,18 @@ button{
 }
 .barFill{height:100%;background:#4caf50;width:0%}
 .barFillAcc{height:100%;background:#1976d2;width:0%}
+
 .small{font-size:12px;color:#666}
+
+button{
+  padding:10px 16px;
+  font-size:16px;
+  border-radius:8px;
+  border:0;
+  background:#1976d2;
+  color:#fff;
+  margin-top:10px
+}
 </style>
 </head>
 
@@ -61,9 +62,9 @@ button{
 <h1>英単語テスト</h1>
 
 <div class="controlCard">
-  出題する問題番号（例：1-20,25,30-35）<br>
+  出題する問題番号（例：1-20,25-30）<br>
   <input type="text" id="rangeInput" value="1-10"/>
-  <button id="startBtn" style="margin-top:8px">開始</button>
+  <button id="startBtn">開始</button>
   <div id="loadInfo" class="small" style="margin-top:8px"></div>
 </div>
 
@@ -85,7 +86,7 @@ button{
 </div>
 
 <div class="small" style="max-width:720px;margin:8px auto;text-align:right">
-操作：手書き or 入力 → 判定する（または Enter）
+操作：Scribble or キーボード → 判定する（または Enter）
 </div>
 
 <script>
@@ -151,7 +152,6 @@ fetch('words.csv')
 })
 .catch(()=>alert('words.csv が読み込めません'));
 
-/* ---------- 範囲解析 ---------- */
 function parseRanges(str){
   const set=new Set();
   str.split(',').forEach(p=>{
@@ -167,18 +167,16 @@ function parseRanges(str){
   return set;
 }
 
-/* ---------- 開始 ---------- */
 startBtn.onclick=()=>{
   const nums=parseRanges(rangeInput.value);
   pool=allQ.filter(q=>nums.has(q.no));
   if(!pool.length){alert('該当する問題がありません');return;}
   pool=shuffle(pool);
-  current=answered=correct=0;wrong=[];
-  waiting=false;mode='main';
+  current=answered=correct=0;
+  wrong=[];waiting=false;mode='main';
   show();
 };
 
-/* ---------- 表示 ---------- */
 function show(){
   quizArea.innerHTML='';
   if(current>=pool.length){
@@ -197,9 +195,7 @@ function show(){
 
       <input id="ans" type="text"/>
 
-      <button id="checkBtn" style="margin-top:10px">
-        判定する
-      </button>
+      <button id="checkBtn">判定する / 次へ</button>
 
       <div id="res" class="result"></div>
       <div id="corr" class="answer"></div>
@@ -214,7 +210,6 @@ function show(){
       handleCheck();
     }
   };
-
   document.getElementById('checkBtn').onclick=handleCheck;
   update();
 }
@@ -228,7 +223,6 @@ function handleCheck(){
   }
 }
 
-/* ---------- 判定 ---------- */
 function check(){
   const input=document.getElementById('ans');
   const u=input.value.trim().toLowerCase();
@@ -249,7 +243,6 @@ function check(){
   update();
 }
 
-/* ---------- 進捗 ---------- */
 function update(){
   const total=pool.length;
   const acc=answered?correct/answered*100:0;
@@ -265,4 +258,3 @@ function update(){
 </script>
 </body>
 </html>
-
