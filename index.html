@@ -3,22 +3,57 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>英単語テスト（入力＋手書き対応）</title>
+<title>英単語テスト（番号指定・手書き対応）</title>
 
 <style>
-body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;padding:18px;background:#fafafa}
-.controlCard,.card,.barWrap{background:#fff;border-radius:10px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);max-width:720px;margin:12px auto}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  padding:18px;background:#fafafa
+}
+.controlCard,.card,.barWrap{
+  background:#fff;border-radius:10px;padding:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+  max-width:720px;margin:12px auto
+}
 h1{font-size:18px}
 .jp{font-size:22px;margin-bottom:6px}
 .no{font-size:14px;color:#555;margin-bottom:10px}
-input[type=text]{width:100%;padding:10px;font-size:18px;border-radius:6px;border:1px solid #ccc}
-canvas{border:1px solid #ccc;border-radius:6px;touch-action:none;background:#fff}
+
+/* ★ 手書きしやすい入力欄 */
+input[type=text]{
+  width:100%;
+  padding:16px;
+  font-size:22px;
+  border-radius:10px;
+  border:2px solid #ccc;
+  min-height:56px;
+}
+
 .result{margin-top:12px;font-size:18px;min-height:30px}
 .correct{color:green;font-weight:700}
 .incorrect{color:#d9534f;font-weight:700}
 .answer{color:#1a73e8;margin-top:6px}
+
+button{
+  padding:10px 16px;
+  font-size:16px;
+  border-radius:8px;
+  border:0;
+  background:#1976d2;
+  color:#fff
+}
+
+.labelRow{
+  display:flex;justify-content:space-between;
+  font-size:13px;color:#444;margin-bottom:6px
+}
+.barBg{
+  width:100%;background:#eee;height:16px;
+  border-radius:8px;overflow:hidden
+}
+.barFill{height:100%;background:#4caf50;width:0%}
+.barFillAcc{height:100%;background:#1976d2;width:0%}
 .small{font-size:12px;color:#666}
-button{padding:6px 10px;font-size:14px;border-radius:6px;border:0;background:#1976d2;color:#fff;margin-right:6px}
 </style>
 </head>
 
@@ -26,131 +61,208 @@ button{padding:6px 10px;font-size:14px;border-radius:6px;border:0;background:#19
 <h1>英単語テスト</h1>
 
 <div class="controlCard">
-  出題番号（例：1-10,15-20）<br>
-  <input type="text" id="rangeInput" value="1-10">
-  <button id="startBtn">開始</button>
-  <div id="loadInfo" class="small" style="margin-top:6px"></div>
+  出題する問題番号（例：1-20,25,30-35）<br>
+  <input type="text" id="rangeInput" value="1-10"/>
+  <button id="startBtn" style="margin-top:8px">開始</button>
+  <div id="loadInfo" class="small" style="margin-top:8px"></div>
 </div>
 
+<div id="status" style="max-width:720px;margin:4px auto;text-align:center"></div>
 <div id="quizArea"></div>
+
+<div class="barWrap">
+  <div class="labelRow">
+    <div>進捗</div><div id="progressText" class="small">0 / 0</div>
+  </div>
+  <div class="barBg"><div id="progressBar" class="barFill"></div></div>
+
+  <div style="height:10px"></div>
+
+  <div class="labelRow">
+    <div>正解率</div><div id="accuracyText" class="small">0 / 0 (0%)</div>
+  </div>
+  <div class="barBg"><div id="accuracyBar" class="barFillAcc"></div></div>
+</div>
+
+<div class="small" style="max-width:720px;margin:8px auto;text-align:right">
+操作：手書き or 入力 → 判定する（または Enter）
+</div>
 
 <script>
 (function(){
 
-/* ===== CSV ===== */
-function parseCSV(t){
-  t=t.replace(/^\uFEFF/,'');
-  const r=[];let c='',row=[],q=false;
-  for(let i=0;i<t.length;i++){
-    const x=t[i],n=t[i+1];
-    if(x=='"'){ if(q&&n=='"'){c+='"';i++;} else q=!q; continue;}
-    if(x==','&&!q){row.push(c);c='';continue;}
-    if((x=='\n'||x=='\r')&&!q){
-      if(c||row.length){row.push(c);r.push(row);}
-      c='';row=[]; if(x=='\r'&&n=='\n')i++; continue;
+/* ---------- CSVパーサ ---------- */
+function parseCSV(text){
+  text=text.replace(/^\uFEFF/,'');
+  const rows=[];let cur='',row=[],inQ=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i],n=text[i+1];
+    if(c=='"'){ if(inQ&&n=='"'){cur+='"';i++;} else inQ=!inQ; continue; }
+    if(c==','&&!inQ){row.push(cur);cur='';continue;}
+    if((c=='\n'||c=='\r')&&!inQ){
+      if(cur||row.length){row.push(cur);rows.push(row);}
+      cur='';row=[]; if(c=='\r'&&n=='\n')i++; continue;
     }
-    c+=x;
+    cur+=c;
   }
-  if(c||row.length){row.push(c);r.push(row);}
-  return r;
+  if(cur||row.length){row.push(cur);rows.push(row);}
+  return rows;
 }
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function esc(s){
+  return String(s).replace(/[&<>"']/g,
+    m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])
+  );
+}
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
 
-let allQ=[],pool=[],cur=0,waiting=false;
+/* ---------- 状態 ---------- */
+let allQ=[],pool=[],wrong=[];
+let current=0,answered=0,correct=0;
+let waiting=false,mode='main';
 
-/* ===== DOM ===== */
+/* ---------- DOM ---------- */
 const rangeInput=document.getElementById('rangeInput');
 const startBtn=document.getElementById('startBtn');
-const quizArea=document.getElementById('quizArea');
 const loadInfo=document.getElementById('loadInfo');
+const quizArea=document.getElementById('quizArea');
+const status=document.getElementById('status');
+const progressBar=document.getElementById('progressBar');
+const progressText=document.getElementById('progressText');
+const accuracyBar=document.getElementById('accuracyBar');
+const accuracyText=document.getElementById('accuracyText');
 
-/* ===== CSV load ===== */
-fetch('words.csv').then(r=>r.text()).then(t=>{
+/* ---------- CSV読込 ---------- */
+fetch('words.csv')
+.then(r=>r.text())
+.then(t=>{
   parseCSV(t).forEach(r=>{
-    const no=Number(r[0]),e=r[1]?.trim(),j=r[2]?.trim();
+    const no=Number(r[0]);
+    const e=(r[1]||'').trim();
+    const j=(r[2]||'').trim();
     if(!isNaN(no)&&e&&j) allQ.push({no,eng:e,jp:j});
   });
-  loadInfo.textContent=`${allQ.length}問 読み込み完了`;
-});
+  loadInfo.textContent=`words.csv を読み込みました（${allQ.length}問）`;
+})
+.catch(()=>alert('words.csv が読み込めません'));
 
-function parseRanges(s){
+/* ---------- 範囲解析 ---------- */
+function parseRanges(str){
   const set=new Set();
-  s.split(',').forEach(p=>{
+  str.split(',').forEach(p=>{
     if(p.includes('-')){
       let[a,b]=p.split('-').map(Number);
-      for(let i=a;i<=b;i++) set.add(i);
+      if(!isNaN(a)&&!isNaN(b))
+        for(let i=a;i<=b;i++) set.add(i);
     }else{
-      const n=Number(p); if(!isNaN(n)) set.add(n);
+      const n=Number(p);
+      if(!isNaN(n)) set.add(n);
     }
   });
   return set;
 }
 
+/* ---------- 開始 ---------- */
 startBtn.onclick=()=>{
   const nums=parseRanges(rangeInput.value);
-  pool=shuffle(allQ.filter(q=>nums.has(q.no)));
-  if(!pool.length){alert('問題がありません');return;}
-  cur=0; waiting=false;
+  pool=allQ.filter(q=>nums.has(q.no));
+  if(!pool.length){alert('該当する問題がありません');return;}
+  pool=shuffle(pool);
+  current=answered=correct=0;wrong=[];
+  waiting=false;mode='main';
   show();
 };
 
+/* ---------- 表示 ---------- */
 function show(){
   quizArea.innerHTML='';
-  if(cur>=pool.length){alert('終了！');return;}
-  const q=pool[cur];
+  if(current>=pool.length){
+    if(wrong.length){
+      pool=shuffle(wrong.slice());
+      wrong=[];current=answered=correct=0;
+      mode='review';show();return;
+    }
+    alert('終了！');return;
+  }
+  const q=pool[current];
   quizArea.innerHTML=`
-  <div class="card">
-    <div class="no">問題番号：${q.no}</div>
-    <div class="jp"><b>日本語：</b>${esc(q.jp)}</div>
+    <div class="card">
+      <div class="no">問題番号：${q.no}</div>
+      <div class="jp"><b>日本語：</b>${esc(q.jp)}</div>
 
-    <input id="ans" type="text" placeholder="キーボード入力">
+      <input id="ans" type="text"/>
 
-    <div class="small" style="margin:8px 0">または手書き：</div>
-    <canvas id="pad" width="320" height="120"></canvas><br>
-    <button id="clearBtn">消す</button>
+      <button id="checkBtn" style="margin-top:10px">
+        判定する
+      </button>
 
-    <div id="res" class="result"></div>
-    <div id="corr" class="answer"></div>
-  </div>`;
-
+      <div id="res" class="result"></div>
+      <div id="corr" class="answer"></div>
+    </div>
+  `;
   const input=document.getElementById('ans');
-  const canvas=document.getElementById('pad');
-  const ctx=canvas.getContext('2d');
-  ctx.lineWidth=3; ctx.lineCap='round';
-
-  let drawing=false;
-  canvas.onpointerdown=e=>{drawing=true;ctx.beginPath();ctx.moveTo(e.offsetX,e.offsetY);}
-  canvas.onpointermove=e=>{if(drawing){ctx.lineTo(e.offsetX,e.offsetY);ctx.stroke();}}
-  canvas.onpointerup=()=>drawing=false;
-  canvas.onpointerleave=()=>drawing=false;
-
-  document.getElementById('clearBtn').onclick=()=>ctx.clearRect(0,0,canvas.width,canvas.height);
-
   input.focus();
+
   input.onkeydown=e=>{
     if(e.key==='Enter'){
       e.preventDefault();
-      if(!waiting) check(q.eng);
-      else{waiting=false;cur++;show();}
+      handleCheck();
     }
   };
+
+  document.getElementById('checkBtn').onclick=handleCheck;
+  update();
 }
 
-function check(ans){
+function handleCheck(){
+  if(!waiting) check();
+  else{
+    waiting=false;
+    current++;
+    show();
+  }
+}
+
+/* ---------- 判定 ---------- */
+function check(){
   const input=document.getElementById('ans');
+  const u=input.value.trim().toLowerCase();
+  const a=pool[current].eng.toLowerCase();
   const res=document.getElementById('res');
   const corr=document.getElementById('corr');
-  if(input.value.trim().toLowerCase()===ans.toLowerCase()){
+
+  if(u===a){
     res.innerHTML='<span class="correct">〇 正解</span>';
+    correct++;
   }else{
     res.innerHTML='<span class="incorrect">✕ 不正解</span>';
-    corr.textContent='→ 正解：'+ans;
+    corr.textContent='→ '+pool[current].eng;
+    wrong.push(pool[current]);
   }
+  answered++;
   waiting=true;
+  update();
+}
+
+/* ---------- 進捗 ---------- */
+function update(){
+  const total=pool.length;
+  const acc=answered?correct/answered*100:0;
+  status.textContent=
+    `${mode==='main'?'本番':'復習'} ${current+1}/${total} 正解率 ${acc.toFixed(1)}%`;
+  progressBar.style.width=(current/total*100)+'%';
+  progressText.textContent=`${current+1} / ${total}`;
+  accuracyBar.style.width=acc+'%';
+  accuracyText.textContent=`${correct} / ${answered} (${acc.toFixed(1)}%)`;
 }
 
 })();
 </script>
 </body>
 </html>
+
