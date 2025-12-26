@@ -1,0 +1,355 @@
+﻿809,yell,大声で叫ぶ
+810,abandon,を捨てる
+811,adjust,を適合させる
+812,admire,に敬服する
+813,advance,進出する
+814,alert,に警報を出す
+815,alter,を変える
+816,associate,を結び付ける
+817,assume,を想定する
+818,award,を授与する
+819,bake,を焼く
+820,bend,を曲げる
+821,bet,と断言する
+822,betray,を裏切る
+823,blame,に責任を負わせる
+824,bleed,出血する
+825,bloom,咲く
+826,boil,をゆでる
+827,bump,ぶつかる
+828,burst,を破裂させる
+829,calm,を静める
+830,chase,を追う
+831,chat,おしゃべりする
+832,cheat,をだます
+833,cheer,声援を送る
+834,chew,かむ
+835,chop,を刻む
+836,click,クリックする
+837,collapse,崩壊する
+838,confess,を告白する
+839,confirm,を確認する
+840,congratulate,を称賛する
+841,conquer,を征服する
+842,consist,成り立つ
+843,construct,を建設する
+844,convert,を転換する
+845,convince,を確信させる
+846,count,を数える
+847,debate,を討論する
+848,declare,を宣言する
+849,dedicate,をささげる
+850,define,を定義する
+851,delete,を削除する
+852,demonstrate,を実証する
+853,desire,を強く望む
+854,direct,を向ける
+855,distinguish,識別する
+856,distribute ,を配給する
+857,dive,ダイビングする
+858,dominate,を支配する
+859,drill,を開ける
+860,drown,溺死する
+861,ease,を和らげる
+862,educate,を教育する
+863,enable,に可能にさせる
+864,endanger,を危険にさらす
+865,engage,従事する
+866,ensure,を保証する
+867,entertain,を愉しませる
+868,evaluate,を評価する
+869,exaggerate,を誇張する
+870,expire,有効期限が切れる
+871,export,を輸出する
+872,expose,をさらす
+873,extend,を延長する
+874,float,を浮かべる
+875,illustrate,を例証する
+876,imply,をほのめかす
+877,indicate,を指摘する
+878,insert,を挿入する
+879,instruct,に指導する
+880,insult,を侮辱する
+881,interfere,邪魔する
+882,interpret,を解釈する
+883,irritate,をいらいらさせる
+884,justify,を正当化する
+885,launch,を打ち上げる
+886,lay,（卵）を産む
+887,lean,傾く
+888,link,を関連付ける
+889,manufacture,を製造する
+890,march,行進する
+891,master,を習得する
+892,modify,を修正する
+893,monitor,を監視する
+894,motivate,（人）を動機づける
+895,multiply,（数）に掛ける
+896,oblige,（人）に余儀なくさせる
+897,occupy,を占める
+898,offend,（人）の感情を害する
+899,overcome,を克服する
+900,overlap,重なり合う
+901,owe,を負う
+902,panic,慌てふためく
+903,perceive,を思う
+904,permit,（人）に許可する
+905,pile,を積み重ねる
+906,polish,を磨く
+907,pollute,を汚染する
+908,postpone,を延期する
+909,purify,を浄化する
+910,puzzle,を悩ませる
+911,rebuild,を改築する
+912,recruit,（人）を採用する
+913,reflect,を反射する
+914,refrain,差し控える
+915,reject,を拒絶する
+916,reply,返答する
+917,reproduce,繁殖する
+918,rescue,を救う
+919,resign,辞任する
+920,resist,に抵抗する
+921,review,を見返す
+922,revise,を改訂する
+923,revolve,回転する
+924,rewrite,を書き換える
+925,roast,を焼く
+926,roll,転がる
+927,ruin,を損なう
+928,scratch,を引っかく
+929,seek,を探し求める
+930,settle,定住する
+931,sigh,ため息をつく
+932,skim,にざっと目を通す
+933,slide,を滑らせる
+934,sneeze,くしゃみをする
+935,sniff,のにおいをかぐ
+936,soak,をびしょぬれにする
+937,split,を分ける
+938,starve,飢える
+939,stir,をかき回す
+940,stock,を在庫として置いている
+941,stretch,延びている
+942,substitute,を代用する
+943,suspect,（人）を疑う
+944,suspend,を一時停止にする
+945,tempt,（人）を誘惑する
+946,tighten,をしっかり締める
+947,trace,をたどる
+948,transform,を変形させる
+949,treasure,を大切にする
+950,unpack,を開封する
+951,upgrade,をグレードアップする
+952,urge,に強く求める
+953,utilize,を利用する
+954,vote,投票する
+955,wave,手を振る
+956,whip,を泡立てる、むちで打つ
+957,widen,の幅を広げる
+958,background,背景
+959,checkup,健康診断
+960,childhood,子ども時代
+961,comment,論評
+962,container,容器
+963,convenience,便利
+964,crop,農作物
+965,custom,習慣 c
+966,electronics,電子機器
+967,emotion,感情
+968,extinction,絶滅
+969,fiber,繊維
+970,flavor,味
+971,fossil,化石
+972,fur,毛皮
+973,gravity,重力
+974,habit,習慣 h
+975,habitat,生息地
+976,housework,家事
+977,instrument,楽器
+978,issue,問題点
+979,jam,渋滞
+980,length,長さ
+981,luxury,ぜいたく品
+982,minister,大臣
+983,navy,海軍
+984,opportunity,機会
+985,permission,許可
+986,phenomenon,現象
+987,politician,政治家
+988,principal,校長
+989,prison,刑務所
+990,publicity,宣伝
+991,quantity,量
+992,rainforest,多雨林
+993,religion,宗教
+994,reputation,評判
+995,response,反応
+996,rhythm,律動的な動き、リズム
+997,standard,水準
+998,substance,物質
+999,symbol,象徴
+1000,target,標的
+1001,temple,神殿
+1002,wheel,車輪
+1003,accuracy,正確さ
+1004,acquaintance,知人
+1005,affair,情勢
+1006,agriculture,農業
+1007,altitude,高地
+1008,angle,角度
+1009,anxiety,不安
+1010,appetite,食欲
+1011,applause,拍手
+1012,architect,建築家
+1013,aspect,側面
+1014,attempt,試み
+1015,attitude,態度
+1016,authority,当局
+1017,backpack,リュックサック
+1018,bill,請求書
+1019,biography,伝記
+1020,border,国境（線）
+1021,brand,銘柄
+1022,buffet,ビュッフェ
+1023,burden,重荷
+1024,bureau,（官庁の）局
+1025,campaign,キャンペーン
+1026,candidate,候補者
+1027,capacity,定員
+1028,cash,現金
+1029,ceiling,天井
+1030,certificate,証明書
+1031,championship,選手権
+1032,characteristic,特徴
+1033,circumstance,環境
+1034,coincidence,一致
+1035,colleague,同僚
+1036,committee,委員会
+1037,companion,連れ
+1038,courage,勇気
+1039,credit,称賛
+1040,definition,定義
+1041,delight,喜び
+1042,departure,出発
+1043,depth,深さ
+1044,discrimination,差別
+1045,distinction,区別
+1046,drawing,絵
+1047,ecosystem,生態系
+1048,edge,端
+1049,exception,例外
+1050,explosion,爆発
+1051,fame,名声
+1052,famine,飢餓
+1053,feature,特徴
+1054,feedback,意見、感想
+1055,fiction,小説
+1056,firework,花火
+1057,flour,穀物粉、小麦粉
+1058,formation,形成
+1059,foundation,財団
+1060,frontier,辺境
+1061,funeral,葬式
+1062,greenhouse,温室
+1063,hardship,苦難
+1064,illusion,錯覚
+1065,instinct,本能
+1066,institute,機関
+1067,interaction,相互作用
+1068,investment,投資
+1069,justice,裁判
+1070,laboratory,実験室
+1230,account for,～を説明する
+1231,adapt to,～に順応する
+1232,adjust to,～に順応する
+1233,agree on,～に意見がまとまる
+1234,agree with,～と意見が一致する
+1235,amount to,～に達する
+1236,apologize for,～のことで謝る
+1237,apply for,～に申し込む
+1238,benefit from,～で得をする
+1239,break down,故障する
+1240,break into,～に侵入する
+1241,break out,抜け出す
+1242,break up,（関係などが）終わる
+1243,bring about,～を引き起こす
+1244,bring back,～を思い出させる
+1245,bring down,～を下げる
+1246,bring in,～を動員する
+1247,bring up,～を育てる
+1248,burst into,～を突然始める
+1249,call for,～を声を上げて求める
+1250,call in,ちょっと訪問する
+1251,call off,～を中止する
+1252,call out,～を大声で叫ぶ
+1253,care about,～を気遣う
+1254,care for,～の世話をする
+1255,carry on,続ける
+1256,carry out,～を遂行する
+1257,check in,宿泊手続きをする、チェックインする
+1258,check out,（本）を借りる、チェックアウトする
+1259,come across,～に偶然出会う
+1260,come by,～を手に入れる
+1261,come out,（～番の）成績を取る
+1262,come up with,～を思い付く
+1263,complain about,～について不満を言う
+1264,consist of,～から成り立つ
+1265,contribute to,～の一因となる、～に貢献する
+1266,cope with,～をうまく処理する
+1267,count on,～を頼りにする
+1268,cross out,～を線を引いて消す
+1269,cut down on,～を削減する
+1270,cut off,～を孤立させる
+1271,deal with,～を処理する
+1272,depend on,～次第である
+1273,die out,絶滅する
+1274,disagree about,～について意見が合わない
+1275,do away with,（制度・規則など）を廃止する
+1276,do without,～なしで済ます
+1277,drop by,ひょいと立ち寄る
+1278,drop in,ちょっと立ち寄る
+1279,drop out,退学する
+1280,eat out,外食する
+1281,end up,最後は（～の状態に）なる
+1282,fall on,～の肩に掛かってくる
+1283,figure out,～を理解する
+1284,fill out,～に必要事項を記入する
+1285,find out,～を探り出す
+1286,fit in with,～とうまくやっていく
+1287,focus on,～に集中する
+1288,get along,仲良くやっていく
+1289,get in,（中に）入る
+1290,get over,～を克服する
+1291,give in,～を手渡す
+1292,go ahead,どうぞ
+1293,go along with,～を支持する
+1294,go into,～に入る、～を詳しく調べる
+1295,go off,出掛ける、（警報などが）鳴る
+1296,go over,～を見返す、～を調べる、（近い所へ）行く
+1297,go through,～を経験する
+1298,go with,～と合う、～と一緒に行く
+1299,hand in,～を提出する
+1300,hand out,～を配る
+1301,hang on,しがみつく
+1302,hang up,電話を切る
+1303,head for,～に向かって真っすぐ進む
+1304,hit on,～を思い付く
+1305,hold on,（命令文で）待て
+1306,hold up,持ちこたえる
+1307,insist on,～を言い張る
+1308,keep off,～を控える
+1309,keep up,～を維持する
+1310,keep up with,（遅れず）～に付いていく
+1311,lay off,～を一時解雇する
+1312,lead to,～につながる
+1313,leave for,～に出発する
+1314,live on,（少ない金）で生活する
+1315,look away,目をそらす
+1316,look down on,～を見下す
+1317,look forward to,～を楽しみに待つ
+1318,look into,～を調査する
+1319,look out for,～に気を付ける
+1320,look over,～にざっと目を通す
+1321,look through,～に目を通す
+1322,look up,～を調べる
