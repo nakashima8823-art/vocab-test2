@@ -387,6 +387,38 @@
 1195,solid,確固たる
 1196,sound,堅実な
 1197,specific,特定の
+1198,stable,安定した
+1199,steep,(増減が)急激な
+1200,subtle,微妙な
+1201,terrific,素晴らしい
+1202,accurately,正確に
+1203,afterward,後で、その後
+1204,altogether,全部で
+1205,apparently,聞くところによると(見たところ)～らしい
+1206,beforehand,あらかじめ
+1207,besides,その上
+1208,briefly,少しの間
+1209,brightly,鮮やかに、明るく
+1210,enormously,大いに、非常に
+1211,heavily,(雨などが)激しく
+1212,honestly,正直なところ
+1213,initially,初めは
+1214,instantly,すぐに
+1215,legally,法的に、法律上
+1216,literally,文字通り(に)
+1217,neatly,きちんと
+1218,officially,公式に
+1219,permanently,永久に
+1220,repeatedly,何度も
+1221,seldom,めったに～ない
+1222,seriously,深刻に
+1223,severely,厳しく
+1224,silently,黙って、静かに
+1225,strangely,奇妙に
+1226,surely,確かに
+1227,concerning,～に関する
+1228,once,いったん～すると
+1229,whether,～にかどうか
 1230,account for,～を説明する
 1231,adapt to,～に順応する
 1232,adjust to,～に順応する
@@ -522,8 +554,203 @@
 1362,sit up,寝ないで起きている
 1363,speak up,大きな声で話す
 1364,specialize in,～を専門に扱う
-1365,stand by,～支持する
+1365,stand by,～を支持する
 1366,stand for,～を表す
 1367,stand out,目立つ　
 1368,stare at,～をじっと見つめる
 1369,stay out,家に帰らない
+1370,stick to,～にくっつく
+1371,stop by,～に立ち寄る
+1372,suffer from,～に苦しむ
+1373,take after,～に似ている
+1374,take away,～を連れ去る
+1375,take back,～を返品する
+1376,take down,～を解体する
+1377,take in,～を引き取る
+1378,take off,離陸する
+1379,take on,～を乗せる
+1380,take out,～を（食事など）に連れ出す
+1381,take over,～を引き継ぐ
+1382,take up,（場所・時間など）を占める
+1383,throw away,～を捨てる
+1384,try on,～を着てみる
+1385,try out,～を試しに使ってみる
+1386,turn away,顔を背ける
+1387,turn down,（申し出など）を断る
+1388,turn in,～を提出する
+1389,turn off,（電気など）を消す
+1390,turn on,（電気など）をつける
+1391,turn out,（～であることが）分かる
+1392,turn to,～へ向く
+1393,turn up,現れる
+1394,use up,～を使い果たす
+1395,wait for,～を待つ
+1396,watch out for,～に用心する
+1397,work on,～に取り組む
+1398,work out,トレーニングをする
+1399,regard A as B,AをBと評価する
+1400,aim A at B,AをBに向ける
+1401,name A after B,AにBにちなんで名をつける
+1402,assign A for B,AをBのために割り当てる
+1403,blame A for B,BをAのせいにする
+1404,charge A for B,BをAに請求する
+1405,compensate A for B,AにBを補償する
+1406,take A for B,AをBと間違う
+1407,take A for granted,Aを当たり前のことと思う
+1408,discourage A from doing,Aに～するのをやめさせるd
+1409,distinguish A from B,AをBと区別する
+1410,kepp A from doing,Aに～させないようにする
+1411,prevent A from doing,Aが～するのを妨げる
+1412,save A from B,AをBから救う
+1413,stop A from doing,Aが～するのをやめさせるs
+1414,tell A from B,AとBを見分ける
+1415,convert A into B,AをBに改造する
+1416,divide A into B,AをBに分ける
+1417,load A into B,AをBに積み込む
+1418,put A into B,AをBにつぎ込む
+1419,put A into practice,Aを実行する
+1420,translate A into B,AをBに翻訳する
+1421,turn A into B,AをBに変える
+1422,accuse A of B,AをBの理由で非難する
+1423,inform A of B,AにBを知らせる
+1424,remind A of B,AにBを思い出させる
+1425,concentrate A on B,AをBに集中する
+1426,charge A on B,AをBで支払う
+1427,spend A on B,AをBに費やす
+1428,put A through to B,AをBにつなぐ
+1429,add A to B,AをBに加える
+1430,apply A to B,AをBに適用する
+1431,attach A to B,AをBに付ける
+1432,compare A to B,AをBと比べる
+1433,connect A to B,AをBに接続する
+1434,dedicate A to B,AをBにささげる
+1435,donate A to B,AをBに寄付する
+1436,owe A to B,AはBのおかげである
+1437,show A into B,AをBに通す
+1438,promote A to B,AをBに昇進させる
+1439,treat A to B,AにBを奮発する
+1440,combine A with B,AをBと組み合わせる
+1441,connect A with B,AをBと関連付ける
+1442,decorate A with B,AをBで飾る
+1443,equip A with B,AにBを身に付けさせる
+1444,provide A with B,AにBを提供する
+1445,advise A to do,Aに～するよう助言する
+1446,agree to do,～することに同意する
+1447,aim to do,～することを目指す
+1448,continue to do,～し続ける
+1449,fail to do,～し損なう
+1450,feel free to do,自由に～する
+1451,get to do,～するようになる
+1452,go on to do,続けて～する
+1453,hesitate to do,～するのをためらう
+1454,intend to do,～するつもりである
+1455,manage to do,何とか～する
+1456,prefer to do,～する方をより好む
+1457,pretend to do,～するふりをする
+1458,refuse to do,～するのを拒む
+1459,tend to do,～する傾向にある
+1460,allow A to do,Aが～するのを可能にする
+1461,beg A to do,Aに～してくれるよう懇願する
+1462,cause A to do,Aが～する原因となる
+1463,convince A to do,Aに～するよう説得する
+1464,enable A to do,Aが～するのを可能にする
+1465,encourage A to do,Aを～するように励ます
+1466,force A to do,Aに～するよう強制する
+1467,get A to do,Aに～させる
+1468,invite A to do,Aに～するように依頼する
+1469,persuade A to do,Aを～するように説得する
+1470,urge A to do,Aに～するよう強く求める
+1471,avoid doing,～するのを避ける
+1472,feel like doing,～したい気分だ
+1473,have trouble doing,苦労して～する
+1474,be absorbed in,～に没頭している
+1475,be accustomed to,～に慣れている
+1476,be acquainted with,～を知っている
+1477,be anxious about,～のことを心配している
+1478,be ashamed of,～を恥ずかしく思っている
+1479,be associated with,～に関連している
+1480,be aware of,～を分かっている
+1481,be based on,～に基づいている
+1482,be beneficial to,～に有益な
+1483,be bored with,～に飽きている
+1484,be bound for,～へ向かう
+1485,be capable of,～ができる
+1486,be cautious of,～について慎重である
+1487,be concerned about,～について心配している
+1488,be confident of,～を確信している
+1489,be conscious of,～を気にしている
+1490,be done with,～と関わるのをやめる
+1491,be equipped with,～が装備されている
+1492,be familiar to,～になじみがある
+1493,be familiar with,～に精通している
+1494,be fed up with,～にうんざりしている
+1495,be impressed by,～に感銘を受ける
+1496,be ignorant of,～を知らない
+1497,be indifferent to,～に無関心である
+1498,be inferior to,～より劣っている
+1499,be involved in,～に関係している
+1500,be located in,～に位置している
+1501,be made up of,～で成り立っている
+1502,be peculiar to,～に特有のものである
+1503,be related to,～と関連している
+1504,be responsible for,～の責任がある
+1505,be satisfied with,～に満足している
+1506,be short of,～が不足している
+1507,be sick of,～に嫌気が差している
+1508,be similar to,～に似ている
+1509,be suitable for,～に適している
+1510,be suited for,～にふさわしい
+1511,be surrounded by,～に囲まれている
+1512,be suspicious of,～を疑っている
+1513,be too much for,（～にあは）耐えられない
+1514,be typical of,～の典型である
+1515,be used to,～に慣れている
+1516,be worried about,～を心配している
+1517,be about to do ,～するところだ
+1518,be amazed to do,～して驚いている
+1519,be determined to do,～することに決めている
+1520,be eager to do,～することを切望している
+1521,be expected to do,～すると思われている
+1522,be forced to do,～せざるを得ない
+1523,be liable to do,～しそうである
+1524,be likely to do,～しそうである
+1525,be relieved to do,～して安心する
+1526,be reluctant to do,～するのが気乗りしない
+1527,be required to do,～することを要求される
+1528,be supposed to do,～することになっている
+1529,be sure to do,間違いなく～する
+1530,be unlikely to do,～しそうにない
+1531,be willing to do,～するのをいとわない
+1532,come into being,生じる
+1533,come to an end,終わる
+1534,drop A a line,Aに一筆書いて送る
+1535,get in touch with,～と連絡を取る
+1536,get lost,道に迷う
+1537,get on A's nerves,Aをいらいらさせる
+1538,get rid of,～を取り除く
+1539,give birth to,～を産む
+1540,give rise to,～を引き起こす
+1541,go all the way,徹底的にやる
+1542,have a word with,～とちょっと話す
+1543,have no choice but to do,～するしかない
+1544,have second thoughts,考え直す
+1545,hold the line,電話を切らずに待つ
+1546,keep an eye on,～から目を離さないでいる
+1547,keep one's word,約束を守る
+1548,keep A in mind,Aを心に留めておく
+1549,keep in touch with,～と連絡を取っている
+1550,know better than to do,～するほど愚かではない
+1551,make a difference ,違いが生じる
+1552,make a face,しかめっ面をする
+1553,make do with,～で何とか済ませる
+1554,make fun of,～をからかう
+1555,make one's way,進む
+1556,make sense,意味を成す
+1557,make sure of,～を確かめる
+1558,make use of,～を利用する
+1559,play a role in,～で役割を果たす
+1560,take account of,～を考慮に入れる
+1561,take advantage of,～を利用する
+1562,take part in,～に参加する
+1563,take place,行われる
+1564,used to,～したものだった
